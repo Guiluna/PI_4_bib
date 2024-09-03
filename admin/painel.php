@@ -320,7 +320,7 @@ $nome_escola = $dados['nome'];
             $('.corpo').load('emprestimos/painel.php')
         })
 
-        $('.corpo').load('relatorios/painel.php')
+        $('.corpo').load('menu/painel.php')
 
         $('.relatorios').click(function(){
             $('.menus').removeClass('active');
