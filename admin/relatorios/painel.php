@@ -44,12 +44,7 @@ $dataset = new Dataset();
 //quantidade de emprestimos das respectivas categorias
 $dataset->data = $emprestimos;
 $dataset->label = 'n° de emprestimos';
-//testar random color php para não precisar selecionar manualmente
-$dataset->backgroundColor = [
-    'rgb(255, 99, 132)',
-    'rgb(54, 162, 235)',
-    'rgb(255, 206, 86)'
-];
+
 $data->datasets[] = $dataset;
 
 $chart->data($data);
