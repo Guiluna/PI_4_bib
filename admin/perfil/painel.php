@@ -15,8 +15,8 @@ $nome_escola = $dados['nome'];
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Inovação Bibliotecária</h5>
-                    <p class="m-b-0">Bem-vindo(a) ao Sistema para Controle de Acervo Literário</p>
+                    <h5 class="m-b-10">Dados da Instituição</h5>
+                    <p class="m-b-0">Edição do perfil da instituição</p>
                 </div>
             </div>
             <div class="col-md-4">

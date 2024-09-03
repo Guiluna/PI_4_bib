@@ -53,7 +53,7 @@ input[type="radio"]:checked {
             <div class="col-md-8">
                 <div class="page-header-title">
                     <h5 class="m-b-10">Cursos/Turmas/Setores</h5>
-                    <p class="m-b-0">Bem-vindo(a) ao Inovação Bibliotecaria</p>
+                    <p class="m-b-0">Cadastro, edição e exclusão de cursos, turmas e setores.</p>
                 </div>
             </div>
             <div class="col-md-4">
