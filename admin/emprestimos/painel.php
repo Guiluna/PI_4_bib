@@ -59,7 +59,7 @@ input[type="radio"]:checked {
             <div class="col-md-4">
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item">
-                        <a href="painel.php"> <i class="fa fa-home"></i> </a>
+                        <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)"></a>
                     </li>

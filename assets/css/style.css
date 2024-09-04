@@ -5913,10 +5913,10 @@ table tbody .border-bottom-info td {
 .text-c-yellow {
   color: #ffe100; }
 
-.bg-c-orenge {
+.bg-c-orange {
   background: #FE8A7D; }
 
-.text-c-orenge {
+.text-c-orange {
   color: #FE8A7D; }
 
 .bg-c-lite-green {
@@ -5931,6 +5931,12 @@ table tbody .border-bottom-info td {
 .text-c-purple {
   color: #536dfe; }
 
+.bg-c-teal {
+  color: #009578;
+}
+.text-c-teal {
+  color: #009578;
+}
 /*======= All-color css ends  ======= */
 /**====== Generic-class css end ======**/
 .pcoded[nav-type="st1"] .pcoded-item.pcoded-left-item > li:nth-child(1) > a > .pcoded-micon {

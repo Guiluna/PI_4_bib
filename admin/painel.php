@@ -172,10 +172,10 @@ $nome_escola = $dados['nome'];
                                 <!--<img class="img-fluid" src="../imagens/logo_novo.png" style="width: 130px; margin-bottom: -10px; margin-top:-7px;" alt="Theme-Logo" />-->
                             </div>
                           <ul class="pcoded-item pcoded-left-item">
-                              <li class="dashboard1 menus">
+                              <li class="menu menus">
                                   <a href="painel.php" class="waves-effect waves-dark dashboard">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                      <span class="pcoded-mtext" data-i18n="nav.dash.main">Menu</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
@@ -236,18 +236,15 @@ $nome_escola = $dados['nome'];
                                   </a>
                                  
                               </li>
-                              <!--
-                              <li class="relatorios1 menus">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark relatorios">
+                              
+                              <li class="dashboard1 menus">
+                                  <a href="javascript:void(0)" class="waves-effect waves-dark dashboard">
                                       <span class="pcoded-micon"><i class="ti-bar-chart"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.dash.main">Relatórios</span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.dash.main">Dashboard</span>
                                       
                                   </a>                                 
                               </li>
-                             -->
-                              
-                              
-                             
+                    
                           </ul>
                      
                       </div>
@@ -290,8 +287,7 @@ $nome_escola = $dados['nome'];
 </body>
 <script>
     $(function(){
-        //$('.corpo').load("dashboard.php")
-        $('.dashboard1').addClass('active');
+        $('.menu').addClass('active');
 
         $('.categorias').click(function(){
             $('.menus').removeClass('active');
@@ -322,25 +318,17 @@ $nome_escola = $dados['nome'];
 
         $('.corpo').load('menu/painel.php')
 
-        $('.relatorios').click(function(){
+        $('.dashboard').click(function(){
             $('.menus').removeClass('active');
-            $('.relatorios1').addClass('active');
+            $('.dashboard1').addClass('active');
             $('.corpo').load('relatorios/painel.php')
         })
-
-
-        
-       
 
         $('.escola').click(function(){
             $('.menus').removeClass('active');
             $('.escola1').addClass('active');
             $('.corpo').load('perfil/painel.php')
-        })
-
-        
-
-       
+        })       
     })
 </script>
 </html>
