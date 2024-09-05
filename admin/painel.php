@@ -21,7 +21,7 @@ $nome_escola = $dados['nome'];
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      
       <!-- Favicon icon -->
-      <link rel="icon" href="../arquivos/assets/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="../arquivos/assets/images/book.ico" type="image/x-icon">
       <!-- waves.css -->
     <link rel="stylesheet" href="../arquivos/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
       <!-- Required Framework -->

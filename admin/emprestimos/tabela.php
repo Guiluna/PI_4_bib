@@ -155,13 +155,7 @@ $nome_escola = $dados['nome'];
                 $nomeDoMes = mesPorExtenso($mes);
                 $cor_linha = '';
                 $devolvido = '';
-                if($devolvido_em == ''){
-                    $cor_linha = 'yellow';
-                    $devolvido = 'não';
-                }else{
-                    $cor_linha = '';
-                    $devolvido = 'sim';
-                }
+
                
                 ?>
                 <tr style="background:<?php echo $cor_linha ?>">
@@ -206,7 +200,13 @@ $nome_escola = $dados['nome'];
     </table>
 </div>
 <div id="pagination-container"></div>
-
+<div class="text-center">
+    <center>
+        <button class="btn waves-effect waves-light btn-primary novo"  style="width: 120px"><i class="ti-check-box"></i><br>Novo</button>
+        <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>Editar</button>
+        <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>Excluir</button>
+    </center>
+</div>
 <script>
     $(function(){
 
@@ -353,5 +353,118 @@ $nome_escola = $dados['nome'];
         
     })
     
+    $('.novo').click(function() { 
+        $(this).hide();
+        $('.pesquisar').hide();
+        $('.salvar').show();
+        $('.cancelar1').show(); 
+        $('.editar').hide();
+        $('.excluir').hide();
+        $('.tabela').load('emprestimos/cad_emprestimo.php');
+        
+        
+    });
+    $('.editar').on('click', function() {
+        // verificar se um input radio foi selecionado
+        if ($('input[name="categoria"]:checked').length === 0) {
+            swal("Aviso!", 'Por favor, selecione um item para editar.', "warning");
+        
+        return;
+        }
+        
+        // obter o id da categoria selecionada
+        var id = $('input[name="categoria"]:checked').data('id');
+
+        $.ajax({
+                type: 'POST',
+                url: 'emprestimos/edita_emprestimo.php',
+                data: {'id':id },
+                //se tudo der certo o evento abaixo é disparado
+                success: function(data) {
+                    $('.editar').hide();
+                    $('.salvar').hide();
+                    $('.excluir').hide();
+                    $('.cancelar1').hide();
+                    $('.pesquisar').hide();
+                    $('.novo').hide();
+
+                    $('.tabela').html(data);
+
+            }       
+        })
+        
+        // abrir o modal com o id da categoria selecionada
+        
+        
+    });
+
+    $('.excluir').click(function(e){
+        e.preventDefault()
+        // verificar se um input radio foi selecionado
+        if ($('input[name="categoria"]:checked').length === 0) {
+            swal("Aviso!", 'Por favor, selecione uma item para excluir.', "warning");
+        
+        return;
+        }
+
+        // obter o id da categoria selecionada
+        var id = $('input[name="categoria"]:checked').data('id');
+        
+        swal({
+            title: 'Excluir cadastro?',
+            text: "A exclusão não poderá ser revertida!",
+            type: 'warning',
+            buttons:{
+                confirm: {
+                    text : 'Sim!',
+                    className : 'btn btn-success'
+                },
+                cancel: {
+                    visible: true,
+                    text : 'Cancelar!',
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((Delete) => {
+            if (Delete) {
+                                
+
+            $.ajax({
+                    type: 'POST',
+                    url: 'emprestimos/excluir_emprestimo.php',
+                    data: {'id':id },
+                    //se tudo der certo o evento abaixo é disparado
+                    success: function(data) {
+                        if(data == 1){
+                            $(`input[name='categoria']:checked`).closest('tr').remove();
+                            // $('.tabela').load('emprestimos/tabela.php')
+                            const notificacao = $('<div>', {
+                                'class': 'notificacao',
+                                'text': 'Cadastro excluído com sucesso!'
+                                }).appendTo('body');
+
+                                setTimeout(() => {
+                                notificacao.fadeOut('slow', () => {
+                                    notificacao.remove();
+                                });
+                                }, 5000); // notificação dura 5 segundos (5000 milissegundos)
+                        }else{
+                            swal(data, {
+                            buttons: {        			
+                                confirm: {
+                                    className : 'btn btn-warning'
+                                }
+                            },
+                        });
+                        }
+                
+                    }        
+                })
+            } else {
+                swal.close();
+            }
+        });
+    })
+
 </script>
              
