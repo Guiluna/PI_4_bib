@@ -38,8 +38,8 @@ $usuario_id = $_SESSION['usuarioId'];
                     </div>
                 </div>
                 <div class="col-sm-3 ">
-                        <button type="button" class="btn btn-secondary cancelar" >Retornar</button>
-                        <input type="submit" class="btn btn-success" value="Salvar">
+                    <input type="submit" class="btn btn-success" value="Salvar">
+                    <button type="button" class="btn btn-secondary cancelar" >Retornar</button>
                 </div>
                 
             </div>

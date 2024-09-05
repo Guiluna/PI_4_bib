@@ -61,7 +61,7 @@ input[type="radio"]:checked {
                     <li class="breadcrumb-item">
                         <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)"></a>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" class="lista">Usuários</a>
                     </li>
                 </ul>
             </div>
@@ -84,17 +84,6 @@ input[type="radio"]:checked {
                     <div class="tabela">
 
                     </div>
-                    <div class="text-center">
-                        <center>
-                            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
-
-                            <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
-
-                            <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>excluir</button>
-                        </center>
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -122,106 +111,8 @@ input[type="radio"]:checked {
 <script>
     $(function(){
         $('.tabela').load('cad_usuarios/tabela.php');
-        $('.cadastrar').click(function(){
-            $('.tabela').load('cad_usuarios/cad_usuario.php');
+        $('.lista').click(function(){
+            $('.tabela').load('cad_usuarios/tabela.php')
         })
-        
-
-        $('.editar').on('click', function() {
-            // verificar se um input radio foi selecionado
-            if ($('input[name="categoria"]:checked').length === 0) {
-                swal("Aviso!", 'Por favor, selecione um usuário para editar.', "warning");
-            
-            return;
-            }
-            
-            // obter o id da categoria selecionada
-            var id = $('input[name="categoria"]:checked').data('id');
-
-            $.ajax({
-                    type: 'POST',
-                    url: 'cad_usuarios/edita_usuario.php',
-                    data: {'id':id },
-                    //se tudo der certo o evento abaixo é disparado
-                    success: function(data) {
-                        $('#modal').modal('show');
-                        $('#corpo_modal').html(data)
-
-                }       
-            })
-            
-            // abrir o modal com o id da categoria selecionada
-           
-           
-        });
-
-        $('.excluir').click(function(e){
-            e.preventDefault()
-            // verificar se um input radio foi selecionado
-            if ($('input[name="categoria"]:checked').length === 0) {
-                swal("Aviso!", 'Por favor, selecione uma categoria para excluir.', "warning");
-            
-            return;
-            }
-
-            // obter o id da categoria selecionada
-            var id = $('input[name="categoria"]:checked').data('id');
-            
-            swal({
-                title: 'Excluir usuário?',
-                text: "A exclusão não poderá ser revertida!",
-                type: 'warning',
-                buttons:{
-                    confirm: {
-                        text : 'Sim!',
-                        className : 'btn btn-success'
-                    },
-                    cancel: {
-                        visible: true,
-                        text : 'Cancelar!',
-                        className: 'btn btn-danger'
-                    }
-                }
-            }).then((Delete) => {
-                if (Delete) {
-                                   
-
-                $.ajax({
-                        type: 'POST',
-                        url: 'cad_usuarios/excluir_usuario.php',
-                        data: {'id':id },
-                        //se tudo der certo o evento abaixo é disparado
-                        success: function(data) {
-                            if(data == 1){
-                                $(`input[name='categoria']:checked`).closest('tr').remove();
-                                //$('.tabela').load('cad_usuarios/tabela.php');
-                                const notificacao = $('<div>', {
-                                    'class': 'notificacao',
-                                    'text': 'Usuário excluído com sucesso!'
-                                    }).appendTo('body');
-
-                                    setTimeout(() => {
-                                    notificacao.fadeOut('slow', () => {
-                                        notificacao.remove();
-                                    });
-                                    }, 5000); // notificação dura 5 segundos (5000 milissegundos)
-                            }else{
-                                swal(data, {
-                                buttons: {        			
-                                    confirm: {
-                                        className : 'btn btn-warning'
-                                    }
-                                },
-					        });
-                            }
-                    
-                        }        
-                    })
-                } else {
-                    swal.close();
-                }
-            });
-        })
-
     })
 </script>

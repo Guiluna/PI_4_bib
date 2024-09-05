@@ -61,7 +61,7 @@ input[type="radio"]:checked {
                     <li class="breadcrumb-item">
                         <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)"></a>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" class="lista">Emprestimos</a>
                     </li>
                 </ul>
             </div>

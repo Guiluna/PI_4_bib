@@ -24,7 +24,7 @@ $nome_escola = $dados['nome'];
       <link rel="icon" href="../arquivos/assets/images/favicon.ico" type="image/x-icon">
       <!-- waves.css -->
     <link rel="stylesheet" href="../arquivos/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- Required Fremwork -->
+      <!-- Required Framework -->
       <link rel="stylesheet" type="text/css" href="../arquivos/assets/css/bootstrap/css/bootstrap.min.css">
       <!-- waves.css -->
       <link rel="stylesheet" href="../arquivos/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
@@ -111,7 +111,7 @@ $nome_escola = $dados['nome'];
   <!-- Pre-loader end -->
   <div id="pcoded" class="pcoded">
       <div class="pcoded-overlay-box"></div>
-      <div class="pcoded-container navbar-wrapper">
+      <div class="pcoded-container navbar-wrapper" >
           <nav class="navbar header-navbar pcoded-header">
               <div class="navbar-wrapper">
                   <div class="navbar-logo">
@@ -197,14 +197,14 @@ $nome_escola = $dados['nome'];
                                     <li class="">
                                             <a href="javascript:void(0)" class="waves-effect waves-dark categorias">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Categorias</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Gêneros</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="javascript:void(0)" class="waves-effect waves-dark cursos">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Cursos/Turmas/Setores</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Turmas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>

@@ -46,11 +46,23 @@ $nome_escola = $dados['nome'];
               ?>                                             
         </tbody>
     </table>
+    <div class="text-center">
+        <center>
+            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
+
+            <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
+
+            <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>excluir</button>
+        </center>
+
+    </div>
 </div>
 
 <script>
     $(function(){
-
+        $('.cadastrar').click(function(){
+            $('.tabela').load('cad_categorias/cad_categoria.php');
+        })
         $("#tabela-categorias tr").click(function() {
 				$(this).find("input[type='radio']").prop("checked", true);
 				$('#tabela-categorias tbody tr').removeClass('table-highlighted');
@@ -59,16 +71,16 @@ $nome_escola = $dados['nome'];
                 $(this).closest('#tabela-categorias tbody tr').addClass('table-highlighted');
 			});
         
-    // ao clicar em um input radio
-    $('input[name="categoria"]').on('change', function() {
-                // remover a classe de destaque de todas as linhas
-                $('#tabela-categorias tbody tr').removeClass('table-highlighted');
-                
-                // adicionar a classe de destaque à linha selecionada
-                $(this).closest('#tabela-categorias tbody tr').addClass('table-highlighted');
-            });
-        
-    })
+        // ao clicar em um input radio
+        $('input[name="categoria"]').on('change', function() {
+                    // remover a classe de destaque de todas as linhas
+                    $('#tabela-categorias tbody tr').removeClass('table-highlighted');
+                    
+                    // adicionar a classe de destaque à linha selecionada
+                    $(this).closest('#tabela-categorias tbody tr').addClass('table-highlighted');
+                });
+            
+        })
     
 </script>
              

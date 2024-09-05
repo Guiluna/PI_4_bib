@@ -52,8 +52,8 @@ input[type="radio"]:checked {
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Categorias (Áreas do Conhecimento)</h5>
-                    <p class="m-b-0">Cadastro, edição e exclusão de categorias.</p>
+                    <h5 class="m-b-10">Gêneros Literários</h5>
+                    <p class="m-b-0">Cadastro, edição e exclusão de gêneros literários.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -61,7 +61,7 @@ input[type="radio"]:checked {
                     <li class="breadcrumb-item">
                         <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)"></a>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" class="lista">Generos</a>
                     </li>
                 </ul>
             </div>
@@ -85,17 +85,6 @@ input[type="radio"]:checked {
                     <div class="tabela">
 
                     </div>
-                    <div class="text-center">
-                        <center>
-                            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
-
-                            <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
-
-                            <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>excluir</button>
-                        </center>
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -123,10 +112,9 @@ input[type="radio"]:checked {
 <script>
     $(function(){
         $('.tabela').load('cad_categorias/tabela.php');
-        $('.cadastrar').click(function(){
-            $('.tabela').load('cad_categorias/cad_categoria.php');
+        $('.lista').click(function(){
+            $('.tabela').load('cad_categorias/tabela.php')
         })
-        
 
         $('.editar').on('click', function() {
             // verificar se um input radio foi selecionado

@@ -52,8 +52,8 @@ input[type="radio"]:checked {
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Cursos/Turmas/Setores</h5>
-                    <p class="m-b-0">Cadastro, edição e exclusão de cursos, turmas e setores.</p>
+                    <h5 class="m-b-10">Turmas</h5>
+                    <p class="m-b-0">Cadastro, edição e exclusão de turmas.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -61,7 +61,7 @@ input[type="radio"]:checked {
                     <li class="breadcrumb-item">
                         <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)"></a>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" class="lista">Turmas</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@ input[type="radio"]:checked {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Cadastro de Cursos/Turmas/Setores</h5>
+            <h5>Cadastro de Turmas</h5>
             
         </div>
         <div class="card-block typography">
@@ -85,17 +85,6 @@ input[type="radio"]:checked {
                     <div class="tabela">
 
                     </div>
-                    <div class="text-center">
-                        <center>
-                            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
-
-                            <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
-
-                            <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>excluir</button>
-                        </center>
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -123,105 +112,8 @@ input[type="radio"]:checked {
 <script>
     $(function(){
         $('.tabela').load('cursos/tabela.php');
-        $('.cadastrar').click(function(){
-            $('.tabela').load('cursos/cad_curso.php');
+        $('.lista').click(function(){
+            $('.tabela').load('cad_categorias/tabela.php')
         })
-        
-
-        $('.editar').on('click', function() {
-            // verificar se um input radio foi selecionado
-            if ($('input[name="categoria"]:checked').length === 0) {
-                swal("Aviso!", 'Por favor, selecione uma categoria para editar.', "warning");
-            
-            return;
-            }
-            
-            // obter o id da categoria selecionada
-            var id = $('input[name="categoria"]:checked').data('id');
-
-            $.ajax({
-                    type: 'POST',
-                    url: 'cursos/edita_curso.php',
-                    data: {'id':id },
-                    //se tudo der certo o evento abaixo é disparado
-                    success: function(data) {
-                        $('#modal').modal('show');
-                        $('#corpo_modal').html(data)
-
-                }       
-            })
-            
-            // abrir o modal com o id da categoria selecionada
-           
-           
-        });
-
-        $('.excluir').click(function(e){
-            e.preventDefault()
-            // verificar se um input radio foi selecionado
-            if ($('input[name="categoria"]:checked').length === 0) {
-                swal("Aviso!", 'Por favor, selecione uma categoria para excluir.', "warning");
-            
-            return;
-            }
-
-            // obter o id da categoria selecionada
-            var id = $('input[name="categoria"]:checked').data('id');
-            
-            swal({
-                title: 'Excluir categoria?',
-                text: "A exclusão não poderá ser revertida e todos os usuários deste setor também serão excluídos!",
-                type: 'warning',
-                buttons:{
-                    confirm: {
-                        text : 'Sim!',
-                        className : 'btn btn-success'
-                    },
-                    cancel: {
-                        visible: true,
-                        text : 'Cancelar!',
-                        className: 'btn btn-danger'
-                    }
-                }
-            }).then((Delete) => {
-                if (Delete) {
-                                   
-
-                $.ajax({
-                        type: 'POST',
-                        url: 'cursos/excluir_curso.php',
-                        data: {'id':id },
-                        //se tudo der certo o evento abaixo é disparado
-                        success: function(data) {
-                            if(data == 1){
-                                $('.tabela').load('cursos/tabela.php');
-                                const notificacao = $('<div>', {
-                                    'class': 'notificacao',
-                                    'text': 'Categoria excluída com sucesso!'
-                                    }).appendTo('body');
-
-                                    setTimeout(() => {
-                                    notificacao.fadeOut('slow', () => {
-                                        notificacao.remove();
-                                    });
-                                    }, 5000); // notificação dura 5 segundos (5000 milissegundos)
-                            }else{
-                                swal(data, {
-                                buttons: {        			
-                                    confirm: {
-                                        className : 'btn btn-warning'
-                                    }
-                                },
-					        });
-                            }
-                    
-                        }        
-                    })
-                } else {
-                    swal.close();
-                }
-            });
-        })
-
     })
 </script>

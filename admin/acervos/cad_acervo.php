@@ -131,8 +131,8 @@ $usuario_id = $_SESSION['usuarioId'];
                     </div>
                     <div class="form-group form-primary">
                         <br>
-                        <button type="button" class="btn btn-secondary cancelar" >Retornar</button>
                         <input type="submit" class="btn btn-success" value="Salvar">
+                        <button type="button" class="btn btn-secondary cancelar" >Retornar</button>
                     </div>
                 </div>
                 

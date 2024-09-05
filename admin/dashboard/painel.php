@@ -68,7 +68,8 @@ $chart->options($options);
                     <li class="breadcrumb-item">
                         <a href="painel.php"> <i class="fa fa-home f-20"></i> </a>
                     </li>
-                    
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" class="lista">Dashboard</a>
+                    </li>
                 </ul>
             </div>
         </div>
