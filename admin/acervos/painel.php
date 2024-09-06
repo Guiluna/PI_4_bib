@@ -97,7 +97,7 @@ input[type="radio"]:checked {
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalExemploTitulo">Acervo</h5>
+        <h5 class="modal-title" id="modalExemploTitulo">Capa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>

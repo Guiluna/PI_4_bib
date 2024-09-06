@@ -53,7 +53,7 @@ input[type="radio"]:checked {
             <div class="col-md-8">
                 <div class="page-header-title">
                     <h5 class="m-b-10">Empréstimos de Acervo Bibliotecário</h5>
-                    <p class="m-b-0">Cadastro, edição e exclusão de empréstimos.</p>
+                    <p class="m-b-0">Cadastro de emprestimos e devoluções do acervo.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -74,10 +74,6 @@ input[type="radio"]:checked {
 <div class="page-wrapper">
 <div class="page-body">
     <div class="card">
-        <div class="card-header">
-            <h5>Cadastrar Empréstimo de Acervo Bibliotecário</h5>
-            
-        </div>
         <div class="card-block typography">
             <div class="tabela">
 

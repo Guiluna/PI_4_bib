@@ -167,7 +167,7 @@ $nome_escola = $dados['nome'];
 
             <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
 
-            <button class="btn waves-effect waves-light btn-default ver" style="width: 120px"><i class="ti-eye"></i><br>ver</button>
+            <button class="btn waves-effect waves-light btn-default ver" style="width: 120px"><i class="ti-eye"></i><br>capa</button>
 
             <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>excluir</button>
         </center>

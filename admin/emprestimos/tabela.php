@@ -85,7 +85,10 @@ $nome_escola = $dados['nome'];
         background-color: #f2f2f2;
       }
   </style>
-
+<div class="card-header">
+    <h5>Devoluções Pendentes</h5>
+    
+</div>
 <div class="form-group ">
     <input type="text" id="campoPesquisa" name="text" class="form-control" placeholder="pesquisar" >
                        
@@ -95,17 +98,13 @@ $nome_escola = $dados['nome'];
         <thead>
             <tr>
                 <th>#</th>
-                <th></th>
+                <th>Usuário</th>
+                <th>Título</th>
+                <th>Empréstimo</th>
+                <th>Prazo</th>
+                <th>Devolução</th>
                 <th>Ano</th>
                 <th>Mês</th>
-                <th>Título</th>
-                <th>Usuário</th>
-                <th>Empréstimo</th>
-                <th>Devolução</th>
-                <th>Hora</th>
-                <th>Entregue</th>
-                <th><center>Devolvido</center></th>
-                
             </tr>
         </thead>
         <tbody>
@@ -136,7 +135,7 @@ $nome_escola = $dados['nome'];
                     }
 
             $ordem = 1;
-            $lista = $db->query("SELECT * FROM cad_emprestimo  WHERE id_escola = '$usuario_id' ORDER BY mes,ano DESC ");
+            $lista = $db->query("SELECT * FROM cad_emprestimo  WHERE id_escola = '$usuario_id' AND devolvido_em='' ORDER BY mes,ano DESC ");
             while($dados = $lista->fetchArray()){
                 $id = $dados['id'];
                 $id_acervo = $dados['id_acervo'];
@@ -158,17 +157,8 @@ $nome_escola = $dados['nome'];
 
                
                 ?>
-                <tr style="background:<?php echo $cor_linha ?>">
+                <tr>
                 <th scope="row"><?php echo $ordem ?></th>
-                <td>
-                    <div class="radio-container">
-                        <input class="" type="radio" name="categoria" data-id="<?php echo $id ?>" value="option1" >
-                    
-                    </div>
-                </td>
-                <td><?php echo $ano ?></td>
-                <td><?php echo $nomeDoMes ?></td>
-                <td><?php echo $titulo ?></td>
                 <td>
                     <?php 
                     
@@ -179,17 +169,18 @@ $nome_escola = $dados['nome'];
                     ?>
                 
                 </td>
+                <td><?php echo $titulo ?></td>
                 
                 <td><?php echo $data_atual ?></td>
                 <td><?php echo $data_devolucao ?></td>
                
-                <td><?php echo $hora ?></td>
                 <td>
                 <input style="width:90px;" data-id="<?php echo $id ?>" type="text"  name="devolvido_em" value="<?php echo $devolvido_em ?>" class=" devolvido_em" >
                     
                 </td>
-                <td><center><?php echo $devolvido ?></center></td>
-               
+                <td><?php echo $ano ?></td>
+                <td><?php echo $nomeDoMes ?></td>
+                
                 
             </tr>
               <?php
@@ -203,8 +194,6 @@ $nome_escola = $dados['nome'];
 <div class="text-center">
     <center>
         <button class="btn waves-effect waves-light btn-primary novo"  style="width: 120px"><i class="ti-check-box"></i><br>Novo</button>
-        <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>Editar</button>
-        <button class="btn waves-effect waves-light btn-danger excluir" style="width: 120px"><i class="ti-trash"></i><br>Excluir</button>
     </center>
 </div>
 <script>

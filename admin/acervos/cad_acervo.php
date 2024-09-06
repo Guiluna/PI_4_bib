@@ -11,9 +11,20 @@ $usuario_id = $_SESSION['usuarioId'];
 <h4>Novo cadastro</h4>
 <form action="" id="form">
             <div class="form-group row" >
+                <div class="col-sm-2">
+                    <div class="form-group form-primary">
+                        <label class="float-label">ISBN *</label>
+                        <input type="text" id="isbn" name="text" class="form-control" >
+                        <span class="form-bar"></span>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-2">    
+                   <button class="btn btn-primary" type="button" id="botao-pesquisa">Buscar</button>
+                </div>
                 <div class="col-sm-12">
                     <div class="form-group form-primary">
-                        <label class="float-label">Título</label>
+                        <label class="float-label">Título *</label>
                         <input type="text" id="titulo" name="text" class="form-control" >
                         <span class="form-bar"></span>
                         
@@ -21,7 +32,7 @@ $usuario_id = $_SESSION['usuarioId'];
                 </div>
                 <div class="col-sm-10">
                     <div class="form-group form-primary">
-                        <label class="float-label">Autor</label>
+                        <label class="float-label">Autor *</label>
                         <input type="text" id="autor" name="text" class="form-control" >
                         <span class="form-bar"></span>
                         
@@ -29,7 +40,7 @@ $usuario_id = $_SESSION['usuarioId'];
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group form-primary">
-                        <label class="float-label">Quantidade</label>
+                        <label class="float-label">Quantidade *</label>
                         <input type="number" id="quantidade" name="quant" class="form-control" >
                         <span class="form-bar"></span>
                         
@@ -43,14 +54,7 @@ $usuario_id = $_SESSION['usuarioId'];
                         
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group form-primary">
-                        <label class="float-label">ISBN</label>
-                        <input type="text" id="isbn" name="text" class="form-control" >
-                        <span class="form-bar"></span>
-                        
-                    </div>
-                </div>
+                
                 <div class="col-sm-5">
                     <div class="form-group form-primary">
                         <label class="float-label">Editora</label>
@@ -62,7 +66,7 @@ $usuario_id = $_SESSION['usuarioId'];
                 <div class="col-sm-3">
                     <div class="form-group form-primary">
                         <select name="" id="tipo" class="form-control">
-                            <option value="">Selecione uma categoria</option>
+                            <option value="">Selecione uma categoria *</option>
                             <option>LIVRO</option>
                             <option>REVISTA</option>
                             <option>COLEÇÃO</option>
@@ -80,7 +84,7 @@ $usuario_id = $_SESSION['usuarioId'];
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group form-primary">
-                            <label class="float-label">Setor</label>
+                            <label class="float-label">Setor *</label>
                             <input type="text" id="setor" name="text" class="form-control" >
                             <span class="form-bar"></span>
                             
@@ -88,7 +92,7 @@ $usuario_id = $_SESSION['usuarioId'];
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group form-primary">
-                            <label class="float-label">Estante</label>
+                            <label class="float-label">Estante *</label>
                             <input type="text" id="estante" name="text" class="form-control" >
                             <span class="form-bar"></span>
                             
@@ -96,7 +100,7 @@ $usuario_id = $_SESSION['usuarioId'];
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group form-primary">
-                            <label class="float-label">Prateleira</label>
+                            <label class="float-label">Prateleira *</label>
                             <input type="text" id="prateleira" name="text" class="form-control" >
                             <span class="form-bar"></span>
                             
@@ -114,7 +118,7 @@ $usuario_id = $_SESSION['usuarioId'];
                 <div class="col-sm-4">
                     <div class="form-group form-primary">
                         <select name="" id="categoria" class="form-control">
-                            <option value="">Selecione uma área de conhecimento</option>
+                            <option value="">Selecione um gênero *</option>
                                             <?php
                                                     $lista = $db->query("SELECT * FROM cad_categoria  WHERE id_escola = '$usuario_id'  ORDER BY titulo");
                                                     while($dados = $lista->fetchArray()){
@@ -145,6 +149,27 @@ $usuario_id = $_SESSION['usuarioId'];
 
 <script>
     $(function(){
+        $("#botao-pesquisa").click(function() {
+            var data = new FormData();
+            var isbn = $("#isbn").val();
+            
+            data.append("isbn", isbn);
+
+            $.ajax({
+                type: "POST",
+                url: "acervos/isbn.php",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $("#titulo").val(response.title);
+                    $("#autor").val("teste");
+                    $("#ano").val("teste");
+                    $("#editora").val("teste");
+                    $("#sinopse").val("teste");
+                }
+            })
+        })
         $('.cancelar').click(function(){
             $('.tabela').load('acervos/tabela.php');
         })
