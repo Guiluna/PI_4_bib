@@ -162,11 +162,13 @@ $usuario_id = $_SESSION['usuarioId'];
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    $("#titulo").val(response.title);
-                    $("#autor").val("teste");
-                    $("#ano").val("teste");
-                    $("#editora").val("teste");
-                    $("#sinopse").val("teste");
+                    const obj = JSON.parse(response);
+
+                    $("#titulo").val(obj.title);
+                    $("#autor").val(obj.authors[0]);
+                    $("#ano").val(obj.year);
+                    $("#editora").val(obj.publisher);
+                    $("#sinopse").val(obj.synopsis);
                 }
             })
         })

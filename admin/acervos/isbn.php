@@ -8,6 +8,6 @@
 
     $url = "https://brasilapi.com.br/api/isbn/v1/";
     $api = file_get_contents( $url . $isbn);
-    $defuse = json_decode($api); 
+    ; 
 
-    echo $defuse;
+    echo $api;
