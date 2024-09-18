@@ -8,7 +8,7 @@ $usuario_id = $_SESSION['usuarioId'];
   $lista = $db->query("SELECT * FROM cad_acervo  WHERE id = '$id_acervo'");
 $dados = $lista->fetchArray();
 $titulo = $dados['titulo'];
-$isbn = $dados['isbn'];
+$isbn = strval($dados['isbn']);
 $autor = $dados['autor'];
 $quantidade = $dados['quantidade'];
 $ano = $dados['ano'];
@@ -28,7 +28,7 @@ $defuse = json_decode($api);
 <div class="p-4">
     <center>
         <h6><?php echo $defuse->title?></h6>
-        <img src=<?php echo $defuse->cover_url?> width="400px" height="600px" alt="Não disponivel">
+        <img src=<?php echo $defuse->cover_url?> width="400px" height="600px" alt=<?php echo "Capa do livro" . $titulo?>>
     </center>
 </div>
 <script>

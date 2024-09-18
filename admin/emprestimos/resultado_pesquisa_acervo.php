@@ -11,7 +11,7 @@ if (isset($_POST['pesquisa'])) {
     $pesquisa = $db->escapeString($_POST['pesquisa']);
 
     // Consulta o banco de dados para buscar livros que correspondam à pesquisa
-    $query = "SELECT * FROM cad_acervo WHERE titulo LIKE '%$pesquisa%' AND id_escola='$usuario_id'";
+    $query = "SELECT * FROM cad_acervo WHERE isbn LIKE '%$pesquisa%' AND id_escola='$usuario_id' OR titulo LIKE '%$pesquisa%' AND id_escola='$usuario_id'";
     $resultado = $db->query($query);
 
     // Gera a lista de resultados como uma tabela

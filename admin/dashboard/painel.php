@@ -24,6 +24,9 @@ $chart->type = 'doughnut';
 //lista de categorias de livros cadastradas
 $titulos = [];
 $emprestimos = [];
+$mes = date("m");
+$ano = date("Y");
+
 $data = new Data();
 $categorias = $db->query("SELECT * FROM cad_categoria WHERE id_escola = '$usuario_id'");
 while($dados = $categorias->fetchArray()){
@@ -33,10 +36,13 @@ while($dados = $categorias->fetchArray()){
 
     $ordem = 0;
     //adicionar categoria ao banco de dados de emprestimo
-    $lista = $db->query("SELECT * FROM cad_acervo  WHERE categoria = '$id'");
-    while($dados = $lista->fetchArray()){ $ordem += $dados['emprestimos']; }
     
-    $emprestimos[]=$ordem;
+    $query = "SELECT COUNT(*) as quantidade FROM cad_emprestimo JOIN cad_acervo ON cad_acervo.id = cad_emprestimo.id_acervo JOIN cad_categoria ON cad_categoria.id = cad_acervo.categoria AND (cad_categoria.id = '$id' AND cad_emprestimo.mes = '$mes'AND cad_emprestimo.ano = '$ano')";
+    $result = $db->query($query);
+
+    $row = $result->fetchArray(SQLITE3_ASSOC);
+    $emprestimos[] = $row['quantidade'];
+
 }
 $data->labels = $titulos;
 
@@ -93,8 +99,36 @@ $chart->options($options);
                                     <div class="col-8">
                                         <h5 class="text-white m-b-0">Empréstimos (Categoria)</h5>
                                     </div>
-                                    <div class="col-3 text-right">
-                                        <i class="fa fa-bar-chart text-white f-16"></i>
+
+                                    <select name="" id="tipo" class="form-control">
+                                            <?php
+                                                $lista = $db->query("SELECT DISTINCT mes FROM cad_emprestimo ORDER BY mes DESC");
+                                                while($dados = $lista->fetchArray()){
+                                                    $id = $dados['mes'];
+
+                                                ?>
+                                                <option value="<?php echo $id ?>"><?php echo $id ?></option>
+
+                                            <?php
+                                            }
+                                            ?>         
+                                        </select>
+
+                                    <div class="col-4 text-right">
+                                        <select name="" id="tipo" class="form-control">
+                                            <?php
+                                                $lista = $db->query("SELECT DISTINCT ano FROM cad_emprestimo ORDER BY ano DESC");
+                                                while($dados = $lista->fetchArray()){
+                                                    $id = $dados['ano'];
+
+                                                ?>
+                                                <option value="<?php echo $id ?>"><?php echo $id ?></option>
+
+                                            <?php
+                                            }
+                                            ?>         
+                                        </select>
+                                        <!-- <i class="fa fa-bar-chart text-white f-16"></i> -->
                                     </div>
                                 </div>
                             </div>

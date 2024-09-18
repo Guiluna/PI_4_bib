@@ -119,18 +119,18 @@ $usuario_id = $_SESSION['usuarioId'];
                     <div class="form-group form-primary">
                         <select name="" id="categoria" class="form-control">
                             <option value="">Selecione um gênero *</option>
-                                            <?php
-                                                    $lista = $db->query("SELECT * FROM cad_categoria  WHERE id_escola = '$usuario_id'  ORDER BY titulo");
-                                                    while($dados = $lista->fetchArray()){
-                                                        $id = $dados['id'];
-                                                        $nome = $dados['titulo'];
+                                <?php
+                                        $lista = $db->query("SELECT * FROM cad_categoria  WHERE id_escola = '$usuario_id'  ORDER BY titulo");
+                                        while($dados = $lista->fetchArray()){
+                                            $id = $dados['id'];
+                                            $nome = $dados['titulo'];
 
-                                                    ?>
-                                                    <option value="<?php echo $id ?>"><?php echo $nome ?></option>
+                                        ?>
+                                        <option value="<?php echo $id ?>"><?php echo $nome ?></option>
 
-                                                    <?php
-                                                    }
-                                                    ?>
+                                        <?php
+                                        }
+                                        ?>
                         </select>
                     </div>
                     <div class="form-group form-primary">
