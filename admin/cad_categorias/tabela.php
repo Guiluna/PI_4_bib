@@ -80,6 +80,100 @@ $nome_escola = $dados['nome'];
                     $(this).closest('#tabela-categorias tbody tr').addClass('table-highlighted');
                 });
             
+        $('.editar').on('click', function() {
+            // verificar se um input radio foi selecionado
+                if ($('input[name="categoria"]:checked').length === 0) {
+                    swal("Aviso!", 'Por favor, selecione uma categoria para editar.', "warning");
+                
+                return;
+                }
+                
+                // obter o id da categoria selecionada
+                var id = $('input[name="categoria"]:checked').data('id');
+
+                $.ajax({
+                        type: 'POST',
+                        url: 'cad_categorias/edita_categoria.php',
+                        data: {'id':id },
+                        //se tudo der certo o evento abaixo é disparado
+                        success: function(data) {
+                            $('#modal').modal('show');
+                            $('#corpo_modal').html(data)
+
+                    }       
+                })
+                
+                // abrir o modal com o id da categoria selecionada
+            
+            
+            });
+
+        $('.excluir').click(function(e){
+                e.preventDefault()
+                // verificar se um input radio foi selecionado
+                if ($('input[name="categoria"]:checked').length === 0) {
+                    swal("Aviso!", 'Por favor, selecione uma categoria para excluir.', "warning");
+                
+                return;
+                }
+
+                // obter o id da categoria selecionada
+                var id = $('input[name="categoria"]:checked').data('id');
+                
+                swal({
+                    title: 'Excluir categoria?',
+                    text: "A exclusão não poderá ser revertida!",
+                    type: 'warning',
+                    buttons:{
+                        confirm: {
+                            text : 'Sim!',
+                            className : 'btn btn-success'
+                        },
+                        cancel: {
+                            visible: true,
+                            text : 'Cancelar!',
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((Delete) => {
+                    if (Delete) {
+                                    
+
+                    $.ajax({
+                            type: 'POST',
+                            url: 'cad_categorias/excluir_categoria.php',
+                            data: {'id':id },
+                            //se tudo der certo o evento abaixo é disparado
+                            success: function(data) {
+                                if(data == 1){
+                                    $('.tabela').load('cad_categorias/tabela.php');
+                                    const notificacao = $('<div>', {
+                                        'class': 'notificacao',
+                                        'text': 'Categoria excluída com sucesso!'
+                                        }).appendTo('body');
+
+                                        setTimeout(() => {
+                                        notificacao.fadeOut('slow', () => {
+                                            notificacao.remove();
+                                        });
+                                        }, 5000); // notificação dura 5 segundos (5000 milissegundos)
+                                }else{
+                                    swal(data, {
+                                    buttons: {        			
+                                        confirm: {
+                                            className : 'btn btn-warning'
+                                        }
+                                    },
+                                });
+                                }
+                        
+                            }        
+                        })
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
         })
     
 </script>

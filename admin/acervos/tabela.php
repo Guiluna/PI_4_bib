@@ -194,9 +194,9 @@ $nome_escola = $dados['nome'];
                     
                     // adicionar a classe de destaque à linha selecionada
                     $(this).closest('#tabela-categorias tbody tr').addClass('table-highlighted');
-                });
+        });
 
-                $("#campoPesquisa").on("keyup", function () {
+        $("#campoPesquisa").on("keyup", function () {
             const filtro = $(this).val().toUpperCase();
             $("#tabela-categorias tbody tr").each(function () {
                 const textoLinha = $(this).text().toUpperCase();

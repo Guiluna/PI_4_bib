@@ -26,12 +26,9 @@
             event.preventDefault(); //previne o comportamento padrão do formulário
             var data = new FormData();
             var titulo = $("#titulo").val();
-            
-           
+             
             data.append("titulo", titulo);
           
-           
-
             if(titulo == '' ){
                 swal("Aviso!", 'Descreva o título da categoria', "warning");
             }else {
