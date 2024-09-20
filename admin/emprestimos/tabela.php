@@ -98,11 +98,11 @@ $nome_escola = $dados['nome'];
         <thead>
             <tr>
                 <th>#</th>
+                <th></th>
                 <th>Usuário</th>
                 <th>Título</th>
                 <th>Empréstimo</th>
                 <th>Prazo</th>
-                <th>Devolução</th>
                 <th>Ano</th>
                 <th>Mês</th>
             </tr>
@@ -160,6 +160,12 @@ $nome_escola = $dados['nome'];
                 <tr>
                 <th scope="row"><?php echo $ordem ?></th>
                 <td>
+                    <div class="radio-container">
+                        <input class="" type="radio" name="categoria" data-id="<?php echo $id ?>" value="option1" >
+                    
+                    </div>
+                </td>
+                <td>
                     <?php 
                     
                     $lista2 = $db->query("SELECT * FROM cad_usuario  WHERE id = '$id_usuario' ");
@@ -174,10 +180,6 @@ $nome_escola = $dados['nome'];
                 <td><?php echo $data_atual ?></td>
                 <td><?php echo $data_devolucao ?></td>
                
-                <td>
-                <input style="width:90px;" data-id="<?php echo $id ?>" type="text"  name="devolvido_em" value="<?php echo $devolvido_em ?>" class=" devolvido_em" >
-                    
-                </td>
                 <td><?php echo $ano ?></td>
                 <td><?php echo $nomeDoMes ?></td>
                 
@@ -193,7 +195,8 @@ $nome_escola = $dados['nome'];
 <div id="pagination-container"></div>
 <div class="text-center">
     <center>
-        <button class="btn waves-effect waves-light btn-primary novo"  style="width: 120px"><i class="ti-check-box"></i><br>Novo</button>
+        <button class="btn waves-effect waves-light btn-primary novo"  style="width: 120px"><i class="ti-write"></i><br>Novo</button>
+        <button class="btn waves-effect waves-light btn-success devolver" style="width: 120px"><i class="ti-check-box"></i><br>Devolver</button>
     </center>
 </div>
 <script>
@@ -353,41 +356,8 @@ $nome_escola = $dados['nome'];
         
         
     });
-    $('.editar').on('click', function() {
-        // verificar se um input radio foi selecionado
-        if ($('input[name="categoria"]:checked').length === 0) {
-            swal("Aviso!", 'Por favor, selecione um item para editar.', "warning");
-        
-        return;
-        }
-        
-        // obter o id da categoria selecionada
-        var id = $('input[name="categoria"]:checked').data('id');
 
-        $.ajax({
-                type: 'POST',
-                url: 'emprestimos/edita_emprestimo.php',
-                data: {'id':id },
-                //se tudo der certo o evento abaixo é disparado
-                success: function(data) {
-                    $('.editar').hide();
-                    $('.salvar').hide();
-                    $('.excluir').hide();
-                    $('.cancelar1').hide();
-                    $('.pesquisar').hide();
-                    $('.novo').hide();
-
-                    $('.tabela').html(data);
-
-            }       
-        })
-        
-        // abrir o modal com o id da categoria selecionada
-        
-        
-    });
-
-    $('.excluir').click(function(e){
+    $('.devolver').click(function(e){
         e.preventDefault()
         // verificar se um input radio foi selecionado
         if ($('input[name="categoria"]:checked').length === 0) {
@@ -398,10 +368,15 @@ $nome_escola = $dados['nome'];
 
         // obter o id da categoria selecionada
         var id = $('input[name="categoria"]:checked').data('id');
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var novaData = day.toString().padStart(2,'0') + '/' + month.toString().padStart(2,'0') + '/' + year;
         
         swal({
-            title: 'Excluir cadastro?',
-            text: "A exclusão não poderá ser revertida!",
+            title: 'Devolver item do acervo?',
+            text: "A devolução não poderá ser revertida!",
             type: 'warning',
             buttons:{
                 confirm: {
@@ -414,14 +389,14 @@ $nome_escola = $dados['nome'];
                     className: 'btn btn-danger'
                 }
             }
-        }).then((Delete) => {
-            if (Delete) {
+        }).then((Devolver) => {
+            if (Devolver) {
                                 
 
             $.ajax({
                     type: 'POST',
-                    url: 'emprestimos/excluir_emprestimo.php',
-                    data: {'id':id },
+                    url: 'emprestimos/devolucao.php',
+                    data: {'id':id, 'novaData' :novaData},
                     //se tudo der certo o evento abaixo é disparado
                     success: function(data) {
                         if(data == 1){
@@ -429,7 +404,7 @@ $nome_escola = $dados['nome'];
                             // $('.tabela').load('emprestimos/tabela.php')
                             const notificacao = $('<div>', {
                                 'class': 'notificacao',
-                                'text': 'Cadastro excluído com sucesso!'
+                                'text': 'Acervo devolvido com sucesso!'
                                 }).appendTo('body');
 
                                 setTimeout(() => {

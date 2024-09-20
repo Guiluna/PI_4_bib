@@ -163,7 +163,7 @@ $nome_escola = $dados['nome'];
 <div id="pagination-container"></div>
 <div class="text-center">
         <center>
-            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
+            <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-write"></i><br>cadastrar</button>
 
             <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
 
