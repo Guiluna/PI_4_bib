@@ -147,14 +147,15 @@ $nome_escola = $dados['nome'];
                           
                       </ul>
                       <ul class="nav-right">
-                          
-                          <li class="user-profile header-notification">
-                              <a href="#!" class="waves-effect waves-light">
-                                  
-                                  <span><?php echo $nome_escola ?></span>
-                                  <i class="ti-angle-down"></i>
+                          <li class="user-profile ">
+                              <a href="javascript:void(0)" class="waves-effect waves-light perfil">
+                                  <span id="id_escola" data-id="<?php $usuario_id?>"><?php echo $nome_escola ?></span>
                               </a>
-                             
+                          </li>
+                          <li>
+                             <a href="../index.php">
+                                <i class="ti-close"></i>
+                             </a>
                           </li>
                       </ul>
                   </div>
@@ -169,23 +170,14 @@ $nome_escola = $dados['nome'];
                          
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">
                                 
-                                <!--<img class="img-fluid" src="../imagens/logo_novo.png" style="width: 130px; margin-bottom: -10px; margin-top:-7px;" alt="Theme-Logo" />-->
                             </div>
                           <ul class="pcoded-item pcoded-left-item">
-                              <li class="menu menus">
-                                  <a href="painel.php" class="waves-effect waves-dark dashboard">
+                              <li class="menu1 menus">
+                                  <a href="javascript:void(0)" class="waves-effect waves-dark menu">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Menu</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
-                              <li class="escola1 menus">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark escola">
-                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.dash.main">Instituição</span>
-                                      
-                                  </a>
-                                 
                               </li>
                               <li class="pcoded-hasmenu cadastros1 menus">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -255,7 +247,20 @@ $nome_escola = $dados['nome'];
             </div>
         </div>
     </div>
-    
+    <div class="modal fade" id="escola" tabindex="-1" role="dialog" aria-labelledby="modalExemploTitulo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalExemploTitulo">Editar nome da instituição</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="corpo_modal_escola"></div>
+        
+        </div>
+    </div>
+    </div>
     
     <!-- Required Jquery -->
     <script type="text/javascript" src="../arquivos/assets/js/jquery/jquery.min.js"></script>
@@ -287,8 +292,14 @@ $nome_escola = $dados['nome'];
 </body>
 <script>
     $(function(){
-        $('.menu').addClass('active');
+        $('.menu1').addClass('active');
+        $('.corpo').load('menu/painel.php')
 
+        $('.menu').click(function(){
+            $('.menus').removeClass('active');
+            $('.menu1').addClass('active');
+            $('.corpo').load('menu/painel.php')
+        })
         $('.categorias').click(function(){
             $('.menus').removeClass('active');
             $('.cadastros1').addClass('active');
@@ -316,19 +327,34 @@ $nome_escola = $dados['nome'];
             $('.corpo').load('emprestimos/painel.php')
         })
 
-        $('.corpo').load('menu/painel.php')
-
         $('.dashboard').click(function(){
             $('.menus').removeClass('active');
             $('.dashboard1').addClass('active');
-            $('.corpo').load('relatorios/painel.php')
+            $('.corpo').load('dashboard/painel.php')
         })
 
         $('.escola').click(function(){
             $('.menus').removeClass('active');
             $('.escola1').addClass('active');
             $('.corpo').load('perfil/painel.php')
-        })       
+        })
+        
+        $('.perfil').click(function(){
+            
+            var id = $('#id_escola').data('id');
+
+            $.ajax({
+                    type: 'POST',
+                    url: 'perfil/edita_escola.php',
+                    data: {'id':id},
+                    //se tudo der certo o evento abaixo é disparado
+                    success: function(data) {
+                        $('#escola').modal('show');
+                        $('#corpo_modal_escola').html(data)
+
+                }       
+            })
+        })
     })
 </script>
 </html>

@@ -49,14 +49,13 @@ $nome_escola = $dados['nome'];
   border-color: #007bff;
   color: white;
 }
-.pagination .btn-nav {
-    background-color: green;
+.pagination .btn-nav {  
+  background-color: green;
   width: 70px;
   height: 40px;
   padding: 10px;
   font-size: 12px;
   line-height: 1.428571429;
-  border-radius: 20px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -195,7 +194,8 @@ $nome_escola = $dados['nome'];
 <div id="pagination-container"></div>
 <div class="text-center">
     <center>
-        <button class="btn waves-effect waves-light btn-primary novo"  style="width: 120px"><i class="ti-write"></i><br>Novo</button>
+        <button class="btn waves-effect waves-light btn-info novo"  style="width: 120px"><i class="ti-write"></i><br>Novo</button>
+        <button class="btn waves-effect waves-light btn-primary historico" style="width: 120px"><i class="ti-list"></i><br>Historico</button>
         <button class="btn waves-effect waves-light btn-success devolver" style="width: 120px"><i class="ti-check-box"></i><br>Devolver</button>
     </center>
 </div>
@@ -341,11 +341,7 @@ $nome_escola = $dados['nome'];
             }
         });
 
-       
-        
-    })
-    
-    $('.novo').click(function() { 
+        $('.novo').click(function() { 
         $(this).hide();
         $('.pesquisar').hide();
         $('.salvar').show();
@@ -428,7 +424,11 @@ $nome_escola = $dados['nome'];
                 swal.close();
             }
         });
+        
+    })  
+    $('.historico').click(function(){
+        $('.tabela').load('emprestimos/historico.php')
     })
-
+    })
 </script>
              

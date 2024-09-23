@@ -34,7 +34,6 @@ $nome_escola = $dados['nome'];
   padding: 5;
   margin: 5px;
   font-size: 16px;
-  
   border-radius: 50%;
 }
 
@@ -56,7 +55,6 @@ $nome_escola = $dados['nome'];
   padding: 10px;
   font-size: 12px;
   line-height: 1.428571429;
-  border-radius: 20px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -127,7 +125,7 @@ $nome_escola = $dados['nome'];
 <div id="pagination-container"></div>
 <div class="text-center">
     <center>
-        <button class="btn waves-effect waves-light btn-primary cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-check-box"></i><br>cadastrar</button>
+        <button class="btn waves-effect waves-light btn-info cadastrar" data-toggle="modal" data-target="#exampleModalCenter" style="width: 120px"><i class="ti-write"></i><br>cadastrar</button>
 
         <button class="btn waves-effect waves-light btn-success editar" style="width: 120px"><i class="ti-pencil-alt"></i><br>editar</button>
 
