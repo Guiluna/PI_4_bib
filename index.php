@@ -164,7 +164,7 @@ $db = new SQLite3('db/bibliotecario.db');
 
 <script>
     $(function(){
-        $('#nome_escola').change(function(){
+        $('#nome_escola').on("change", function(){
             id = $(this).val();
             if(id != "Selecione uma escola"){
                 $.ajax({
