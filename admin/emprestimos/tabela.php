@@ -232,81 +232,82 @@ $nome_escola = $dados['nome'];
     });
 
     const tabela = $('#tabela-categorias');
-        const itensPorPagina = 10;
-        const linhas = tabela.find('tbody tr');
-        const numPaginas = Math.ceil(linhas.length / itensPorPagina);
-        const containerPaginacao = $('#pagination-container');
+    const itensPorPagina = 10;
+    const linhas = tabela.find('tbody tr');
+    const numPaginas = Math.ceil(linhas.length / itensPorPagina);
+    const containerPaginacao = $('#pagination-container');
 
-        function renderizarPaginacao() {
-                containerPaginacao.empty();
-                const ul = $('<ul>').addClass('pagination').appendTo(containerPaginacao);
+    function renderizarPaginacao() {
+            containerPaginacao.empty();
+            const ul = $('<ul>').addClass('pagination').appendTo(containerPaginacao);
 
-                // Botão "Anterior"
-                const liPrev = $('<li>').addClass('page-item').appendTo(ul);
-                $('<a>').addClass('page-link btn-nav')
-                    .attr('href', 'javascript:void(0);')
-                    .text('Anterior')
-                    .on('click', function () {
-                    const paginaAtual = containerPaginacao.find('a.active').text();
-                    if (parseInt(paginaAtual) > 1) {
-                        irParaPagina(parseInt(paginaAtual) - 1);
-                    }
-                    })
-                    .appendTo(liPrev);
+            // Botão "Anterior"
+            const liPrev = $('<li>').addClass('page-item').appendTo(ul);
+            $('<a>').addClass('page-link btn-nav')
+                .attr('href', 'javascript:void(0);')
+                .text('Anterior')
+                .on('click', function () {
+                const paginaAtual = containerPaginacao.find('a.active').text();
+                if (parseInt(paginaAtual) > 1) {
+                    irParaPagina(parseInt(paginaAtual) - 1);
+                }
+                })
+                .appendTo(liPrev);
 
-                // Botões de página
+            // Botões de página
+            const numBotaoVisivel = 5; // Número máximo de botões de página visíveis
+            for (let i = 1; i <= numPaginas; i++) {
+                const li = $('<li>').addClass('page-item').css('display', i <= numBotaoVisivel ? 'inline' : 'none').appendTo(ul);
+                $('<a>').addClass('page-link btn-circle')
+                .attr('href', 'javascript:void(0);')
+                .text(i)
+                .on('click', function () {
+                    irParaPagina(i);
+                })
+                .appendTo(li);
+            }
+
+            // Botão "Próximo"
+            const liNext = $('<li>').addClass('page-item').appendTo(ul);
+            $('<a>').addClass('page-link btn-nav')
+                .attr('href', 'javascript:void(0);')
+                .text('Próximo')
+                .on('click', function () {
+                const paginaAtual = containerPaginacao.find('a.active').text();
+                if (parseInt(paginaAtual) < numPaginas) {
+                    irParaPagina(parseInt(paginaAtual) + 1);
+                }
+                })
+                .appendTo(liNext);
+            }
+
+
+            function irParaPagina(pagina) {
+                const inicio = (pagina - 1) * itensPorPagina;
+                const fim = inicio + itensPorPagina;
+                linhas.hide().slice(inicio, fim).show();
+                containerPaginacao.find('a').removeClass('active');
+                containerPaginacao.find('a.btn-circle').eq(pagina - 1).addClass('active');
+
+                // Atualizar a visibilidade dos botões de página
                 const numBotaoVisivel = 5; // Número máximo de botões de página visíveis
-                for (let i = 1; i <= numPaginas; i++) {
-                    const li = $('<li>').addClass('page-item').css('display', i <= numBotaoVisivel ? 'inline' : 'none').appendTo(ul);
-                    $('<a>').addClass('page-link btn-circle')
-                    .attr('href', 'javascript:void(0);')
-                    .text(i)
-                    .on('click', function () {
-                        irParaPagina(i);
-                    })
-                    .appendTo(li);
+                const metadeVisivel = Math.floor(numBotaoVisivel / 2);
+                const inicioVisivel = Math.max(1, pagina - metadeVisivel);
+                const fimVisivel = Math.min(numPaginas, inicioVisivel + numBotaoVisivel - 1);
+
+                containerPaginacao.find('a.btn-circle').each(function (index) {
+                    if (index + 1 >= inicioVisivel && index + 1 <= fimVisivel) {
+                    $(this).parent().css('display', 'inline');
+                    } else {
+                    $(this).parent().css('display', 'none');
+                    }
+                });
                 }
 
-                // Botão "Próximo"
-                const liNext = $('<li>').addClass('page-item').appendTo(ul);
-                $('<a>').addClass('page-link btn-nav')
-                    .attr('href', 'javascript:void(0);')
-                    .text('Próximo')
-                    .on('click', function () {
-                    const paginaAtual = containerPaginacao.find('a.active').text();
-                    if (parseInt(paginaAtual) < numPaginas) {
-                        irParaPagina(parseInt(paginaAtual) + 1);
-                    }
-                    })
-                    .appendTo(liNext);
-                }
-
-
-                function irParaPagina(pagina) {
-                    const inicio = (pagina - 1) * itensPorPagina;
-                    const fim = inicio + itensPorPagina;
-                    linhas.hide().slice(inicio, fim).show();
-                    containerPaginacao.find('a').removeClass('active');
-                    containerPaginacao.find('a.btn-circle').eq(pagina - 1).addClass('active');
-
-                    // Atualizar a visibilidade dos botões de página
-                    const numBotaoVisivel = 5; // Número máximo de botões de página visíveis
-                    const metadeVisivel = Math.floor(numBotaoVisivel / 2);
-                    const inicioVisivel = Math.max(1, pagina - metadeVisivel);
-                    const fimVisivel = Math.min(numPaginas, inicioVisivel + numBotaoVisivel - 1);
-
-                    containerPaginacao.find('a.btn-circle').each(function (index) {
-                        if (index + 1 >= inicioVisivel && index + 1 <= fimVisivel) {
-                        $(this).parent().css('display', 'inline');
-                        } else {
-                        $(this).parent().css('display', 'none');
-                        }
-                    });
-                    }
-
-
+        if(numPaginas > 1){
         renderizarPaginacao();
         irParaPagina(1);
+        }        
 
         $(".devolvido_em").datepicker({
             showButtonPanel: true,

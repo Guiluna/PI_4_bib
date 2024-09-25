@@ -31,7 +31,7 @@ if($quantidade == 0){
 
     echo '1';
 }else{
-    echo 'Já existe um acervo este título!';
+    echo 'Já existe um acervo com este título!';
 }
 /*
 

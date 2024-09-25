@@ -39,8 +39,8 @@ $nome_escola = $dados['nome'];
         <div class="page-wrapper">
              <!-- Page-body start -->
              <div class="page-body">
-                <div class="row"></div>
-                    <div class="col-xl-4">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card">
                             <div class="card-block bg-c-green">
                                 <div class="row align-items-center">
@@ -67,12 +67,41 @@ $nome_escola = $dados['nome'];
                                             }
                                             ?>         
                                         </select>
-                                        <!-- <i class="fa fa-bar-chart text-white f-16"></i> -->
                                     </div>
                                 </div>
                             </div>
                             <div class="card-block">
                                 <div class="row align-items-center grafico">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card">
+                            <div class="card-block bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="text-white m-b-0" id="titulo">Empréstimos (Mensal)</h5>
+                                    </div>
+                                    
+                                    <div class="col-4 text-right">
+                                        <select name="" id="ano" class="form-control">
+                                            <?php
+                                                $lista = $db->query("SELECT DISTINCT ano FROM cad_emprestimo ORDER BY ano DESC");
+                                                while($dados = $lista->fetchArray()){
+                                                    $ano = $dados['ano'];
+                                                    ?>
+                                                    <option value="<?php echo $ano ?>"><?php echo $ano ?></option>
+                                                    <?php
+                                                    }
+                                            ?>         
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-block col-12">
+                                <div class="row align-items-center grafico_barra">
 
                                 </div>
                             </div>
@@ -92,6 +121,13 @@ $nome_escola = $dados['nome'];
             $('.grafico').load("dashboard/grafico.php", {var: mes});
         })
 
+        var ano = $('#ano').find(":selected").val();
+        $('.grafico_barra').load("dashboard/grafico_barra.php", {var: ano});
+
+        $("#ano").on('change',function(event) {
+            ano = $('#ano').find(":selected").val();
+            $('.grafico_barra').load("dashboard/grafico_barra.php", {var: ano});
+        })        
     })
-    
+    $sql = "SELECT COUNT(*) as quantidade FROM cad_emprestimo WHERE ano = '$ano' AND mes = '$i'";
 </script>

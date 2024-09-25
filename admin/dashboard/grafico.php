@@ -65,9 +65,6 @@ $options->responsive = true;
 $chart->options($options);
 ?>
 <div class="chart-container" >
-    <?= $chart->toHtml('my_chart'); ?>
+    <?= $chart->toHtml('chart1'); ?>
 </div>
 
-<?php
-
-?>
