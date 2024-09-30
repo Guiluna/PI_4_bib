@@ -71,7 +71,7 @@ $nome_escola = $dados['nome'];
                                 </div>
                             </div>
                             <div class="card-block">
-                                <div class="row align-items-center grafico">
+                                <div class="align-items-center grafico">
 
                                 </div>
                             </div>
@@ -101,8 +101,26 @@ $nome_escola = $dados['nome'];
                                 </div>
                             </div>
                             <div class="card-block col-12">
-                                <div class="row align-items-center grafico_barra">
+                                <div class="align-items-center grafico_barra">
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card">
+                            <div class="card-block bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="text-white m-b-0" id="titulo">Acervo Atual</h5>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <i class="ti-bar-chart text-white f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-block col-12">
+                                <div class="align-items-center grafico_acervo">
                                 </div>
                             </div>
                         </div>
@@ -127,7 +145,8 @@ $nome_escola = $dados['nome'];
         $("#ano").on('change',function(event) {
             ano = $('#ano').find(":selected").val();
             $('.grafico_barra').load("dashboard/grafico_barra.php", {var: ano});
-        })        
+        })   
+        
+        $('.grafico_acervo').load("dashboard/grafico_acervo.php");
     })
-    $sql = "SELECT COUNT(*) as quantidade FROM cad_emprestimo WHERE ano = '$ano' AND mes = '$i'";
 </script>

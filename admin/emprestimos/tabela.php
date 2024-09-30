@@ -358,7 +358,7 @@ $nome_escola = $dados['nome'];
         e.preventDefault()
         // verificar se um input radio foi selecionado
         if ($('input[name="categoria"]:checked').length === 0) {
-            swal("Aviso!", 'Por favor, selecione uma item para excluir.', "warning");
+            swal("Aviso!", 'Por favor, selecione uma item para devolver.', "warning");
         
         return;
         }

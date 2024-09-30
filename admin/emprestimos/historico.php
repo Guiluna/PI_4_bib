@@ -101,7 +101,7 @@ $nome_escola = $dados['nome'];
                 <th>Usuário</th>
                 <th>Título</th>
                 <th>Empréstimo</th>
-                <th>Prazo</th>
+                <th>Devolução</th>
                 <th>Ano</th>
                 <th>Mês</th>
             </tr>
@@ -140,7 +140,6 @@ $nome_escola = $dados['nome'];
                 $id_acervo = $dados['id_acervo'];
                 $id_usuario = $dados['id_usuario'];
                 $data_atual = $dados['data_atual'];
-                $data_devolucao = $dados['data_devolucao'];
                 $devolvido_em = $dados['devolvido_em'];
                 $hora = $dados['hora'];
                 $ano = $dados['ano'];
@@ -177,11 +176,10 @@ $nome_escola = $dados['nome'];
                 <td><?php echo $titulo ?></td>
                 
                 <td><?php echo $data_atual ?></td>
-                <td><?php echo $data_devolucao ?></td>
+                <td><?php echo $devolvido_em ?></td>
                
                 <td><?php echo $ano ?></td>
                 <td><?php echo $nomeDoMes ?></td>
-                
                 
             </tr>
               <?php
