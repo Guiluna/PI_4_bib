@@ -126,6 +126,24 @@ $nome_escola = $dados['nome'];
                         </div>
                     </div>
              </div>
+             <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card">
+                        <div class="card-block bg-c-green">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h5 class="text-white m-b-0" id="titulo">Top Empréstimos</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block col-12">
+                            <div class="align-items-center top_acervo">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
          </div>
     </div>
 </div>
@@ -148,5 +166,6 @@ $nome_escola = $dados['nome'];
         })   
         
         $('.grafico_acervo').load("dashboard/grafico_acervo.php");
+        $('.top_acervo').load("dashboard/top_acervo.php");
     })
 </script>

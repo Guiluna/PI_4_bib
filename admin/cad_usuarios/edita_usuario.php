@@ -4,13 +4,12 @@ $db = new SQLite3('../../db/bibliotecario.db');
 session_start(); 
 $usuario_id = $_SESSION['usuarioId'];
 
-  $id_user = $_POST['id'];
-  $lista = $db->query("SELECT * FROM cad_usuario  WHERE id = '$id_user'");
+$id_user = $_POST['id'];
+$lista = $db->query("SELECT * FROM cad_usuario  WHERE id = '$id_user'");
 $dados = $lista->fetchArray();
 $nome = $dados['nome'];
 $setor = $dados['setor'];
-
-  
+$data_nasc = $dados['data_nascimento'];
 ?>
 
 <form action="" id="form">
@@ -36,19 +35,27 @@ $setor = $dados['setor'];
                             ?>
                             <option value="<?php echo $id ?>"><?php echo $nome ?></option>
 
-                                            <?php
-                                                    $lista = $db->query("SELECT * FROM cad_curso  WHERE id_escola = '$usuario_id' AND id != '$setor'  ORDER BY titulo");
-                                                    while($dados = $lista->fetchArray()){
-                                                        $id = $dados['id'];
-                                                        $nome = $dados['titulo'];
+                            <?php
+                                $lista = $db->query("SELECT * FROM cad_curso  WHERE id_escola = '$usuario_id' AND id != '$setor'  ORDER BY titulo");
+                                while($dados = $lista->fetchArray()){
+                                    $id = $dados['id'];
+                                    $nome = $dados['titulo'];
 
-                                                    ?>
-                                                    <option value="<?php echo $id ?>"><?php echo $nome ?></option>
+                                ?>
+                                <option value="<?php echo $id ?>"><?php echo $nome ?></option>
 
-                                                    <?php
-                                                    }
-                                                    ?>
+                                <?php
+                                }
+                                ?>
                         </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <label class="float-label">Data de Nascimento</label>
+                    <div class="form-group form-primary">
+                    <input type="text" id="data_nasc" name="text" value="<?php echo $data_nasc ?>" class="form-control" >
+                    <span class="form-bar"></span>
+                        
                     </div>
                 </div>
                 </div>
@@ -72,6 +79,7 @@ $(function(){
             var titulo = $("#titulo").val();
             var id = $("#id").val();
             var setor = $("#setor").val();
+            var data_nasc = $("#data_nasc").val();
             
         
 

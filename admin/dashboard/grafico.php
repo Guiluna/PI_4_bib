@@ -67,4 +67,3 @@ $chart->options($options);
 <div class="chart-container" >
     <?= $chart->toHtml('chart1'); ?>
 </div>
-

@@ -12,9 +12,9 @@ $dados = $lista->fetchArray();
 $id = $_POST['id'];
 $titulo = $_POST['titulo'];
 $setor = $_POST['setor'];
- 
+$data_nasc = $_POST['data_nasc'];
 
-$insere = $db->query("UPDATE cad_usuario SET nome='$titulo', setor = '$setor'  WHERE id = '$id'"); 
+$insere = $db->query("UPDATE cad_usuario SET nome='$titulo', setor = '$setor' , data_nascimento = '$data_nasc' WHERE id = '$id'"); 
     
 
 echo '1';

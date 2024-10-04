@@ -79,7 +79,7 @@ $nome_escola = $dados['nome'];
                 <th></th>
                 <th>Nome</th>
                 <th>Setor</th>
-                
+                <th>Idade</th>
             </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@ $nome_escola = $dados['nome'];
                 $id = $dados['id'];
                 $nome = $dados['nome'];
                 $setor = $dados['setor'];
-               
+                $data_nasc = $dados['data_nascimento'];
                
                 ?>
                 <th scope="row"><?php echo $ordem ?></th>
@@ -108,12 +108,21 @@ $nome_escola = $dados['nome'];
                     $lista2 = $db->query("SELECT * FROM cad_curso  WHERE id = '$setor' ");
                         $dados2 = $lista2->fetchArray();
                         $titulo = $dados2['titulo'];
-                        echo $titulo
+                        echo $titulo;
                     ?>
                 
                 </td>
-               
-                
+                <td>
+                    <?php
+                     $arr = explode('/', $data_nasc, 3);
+                     $dia = (int)$arr[0];
+                     $mes = (int)$arr[1];
+                     $ano = (int)$arr[2];
+                     $birthday = mktime (0,0,0,$mes,$dia,$ano);
+                     $age = floor((time() - $birthday) / 31556926);
+                     echo $age;
+                    ?>
+                </td>
             </tr>
               <?php
               $ordem++;
